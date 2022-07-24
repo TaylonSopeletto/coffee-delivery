@@ -1,17 +1,45 @@
 <template>
-  <div>
+  <div class="container">
     <img class="image" src="https://i.postimg.cc/qRP1mkdM/Image.png" />
-    <p class="category">Expresso</p>
+
+    <div class="category-list">
+      <p class="category" v-for="category in coffee.categories">
+        {{ category.name }}
+      </p>
+    </div>
+
     <p class="name">{{ coffee.name }}</p>
     <p class="description">{{ coffee.description }}</p>
-    <p class="price">
-      <span class="price-span">R$</span>{{ Number(coffee.price).toFixed(2) }}
-    </p>
+
+    <div class="footer">
+      <p class="price">
+        <span class="price-span">R$</span>{{ Number(coffee.price).toFixed(2) }}
+      </p>
+      <div class="quantity-picker">
+        <button v-on:click="decrement" class="left">-</button>
+        <p>{{ quantity }}</p>
+        <button v-on:click="increment" class="right">+</button>
+      </div>
+      <button>comprar</button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      quantity: 1,
+    };
+  },
+  methods: {
+    increment() {
+      this.quantity++;
+    },
+    decrement() {
+      if (this.quantity > 1) this.quantity--;
+    },
+  },
   name: "Coffee",
   props: {
     coffee: Object,
@@ -20,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-div {
+.container {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -29,11 +57,70 @@ div {
   background: #f3f2f2;
   padding: 20px;
   border-radius: 6px 36px;
-  height: 310px;
   width: 300px;
+  height: 300px;
+}
+
+.quantity-picker {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.quantity-picker button {
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  background: #e6e5e5;
+  color: #8047f8;
+  font-weight: bold;
+  width: 30px;
+  height: 40px;
+}
+
+.quantity-picker .right {
+  border-radius: 0px 10px 10px 0px;
+}
+
+.quantity-picker .left {
+  border-radius: 10px 0px 0px 10px;
+}
+
+.quantity-picker button:hover {
+  background: #dddd;
+  cursor: pointer;
+}
+
+.quantity-picker p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #272221;
+  font-weight: 400;
+
+  width: 30px;
+  text-align: center;
+  background: #e6e5e5;
+  height: 40px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 img {
+  z-index: 1;
   position: absolute;
   top: -30px;
 }
@@ -42,8 +129,10 @@ img {
   background: #f1e9c9;
   color: #c47f17;
   border-radius: 10px;
-  padding: 4px 8px;
+  padding: 4px 10px;
   font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
 }
 
 .name {
@@ -55,6 +144,7 @@ img {
   color: #8d8686;
   text-align: center;
   font-size: 14px;
+  height: 80px;
 }
 
 .price {

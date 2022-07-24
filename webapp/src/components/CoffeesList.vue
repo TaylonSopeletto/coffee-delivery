@@ -37,9 +37,8 @@ export default {
 <style scoped>
 .coffees {
   margin-top: 40px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, calc(100% / 4));
+  row-gap: 40px;
 }
 </style>
