@@ -23,12 +23,18 @@ class OrderDetail(generics.GenericAPIView):
         data = request.data
         order = Order.objects.get(pk=pk)
 
-
         order.products.clear()
         order.save()
 
+        address = request.data["address"]
+        address_id = address['id']
+
+        address_obj = Address.objects.get(pk=address_id)
+        order.address = address_obj
+        
+
         for product in data["products"]:
-            product_obj = Coffee.objects.get(pk=product['product_id'])
+            product_obj = Coffee.objects.get(pk=product['id'])
             order.products.add(product_obj)
         
         
@@ -53,9 +59,14 @@ class OrderList(generics.GenericAPIView):
         new_order = Order.objects.create()
         new_order.save()
 
+        address = request.data["address"]
+        address_id = address['id']
+
+        address_obj = Address.objects.get(pk=address_id)
+        new_order.address = address_obj
 
         for product in data["products"]:
-            product_obj = Coffee.objects.get(pk=product['product_id'])
+            product_obj = Coffee.objects.get(pk=product['id'])
             new_order.products.add(product_obj)
         
         
@@ -140,7 +151,7 @@ class CoffeeList(generics.GenericAPIView):
         new_coffee.save()
 
         for category in data["categories"]:
-            category_obj = Category.objects.get(name=category["name"])
+            category_obj = Category.objects.get(pk=category["id"])
             new_coffee.categories.add(category_obj)
 
         serializer = CoffeeSerializer(new_coffee)

@@ -16,14 +16,20 @@ class CoffeeSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'categories', 'price']
         depth = 1
 
+class AddressSerializer(serializers.ModelSerializer):
+    #profile = ProfileSerializer(read_only=False)
+    class Meta:
+        model = Address
+        fields = ['id', 'name', 'street', 'city', 'country', 'number']
 
 class OrderSerializer(serializers.ModelSerializer):
 
+    address = AddressSerializer(read_only=False)
     products = CoffeeSerializer(many=True, read_only=False)
 
     class Meta:
         model = Order
-        fields = ['id', 'products', 'total_price']
+        fields = ['id', 'products', 'total_price', 'address']
 
 class UserSerializerRegister(serializers.ModelSerializer):
     class Meta:
@@ -40,11 +46,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email']
 
-class AddressSerializer(serializers.ModelSerializer):
-    #profile = ProfileSerializer(read_only=False)
-    class Meta:
-        model = Address
-        fields = ['id', 'name', 'street', 'city', 'country', 'number']
+
 
 class ProfileSerializer(serializers.ModelSerializer):
 
