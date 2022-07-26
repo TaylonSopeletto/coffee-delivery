@@ -14,18 +14,34 @@ import CoffeeList from "../components/CoffeesList.vue";
       <div class="description-items-wrapper">
         <div class="description-list">
           <div>
-            <p>Compra simples e segura</p>
+            <p>
+              <span class="icon orange"
+                ><font-awesome-icon icon="fa-solid fa-cart-shopping" /> </span
+              >Compra simples e segura
+            </p>
           </div>
           <div>
-            <p>Entrega rápida e rastreada</p>
+            <p>
+              <span class="icon yellow"
+                ><font-awesome-icon icon="fa-solid fa-cart-shopping" /> </span
+              >Entrega rápida e rastreada
+            </p>
           </div>
         </div>
         <div class="description-list">
           <div>
-            <p>Embalagem mantém o café intacto</p>
+            <p>
+              <span class="icon black"
+                ><font-awesome-icon icon="fa-solid fa-cart-shopping" /> </span
+              >Embalagem mantém o café intacto
+            </p>
           </div>
           <div>
-            <p>O café chega fresquinho até você</p>
+            <p>
+              <span class="icon blue"
+                ><font-awesome-icon icon="fa-solid fa-cart-shopping" /> </span
+              >O café chega fresquinho até você
+            </p>
           </div>
         </div>
       </div>
@@ -69,6 +85,34 @@ import CoffeeList from "../components/CoffeesList.vue";
   flex-direction: column;
   gap: 20px;
   font-size: 16px;
+}
+
+.description-list div {
+  margin-bottom: 20px;
+}
+
+.icon {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 50%;
+  color: white;
+  margin-right: 10px;
+}
+
+.orange {
+  background: #c47f17;
+}
+
+.yellow {
+  background: #dbac2c;
+}
+
+.black {
+  background: #574f4d;
+}
+
+.blue {
+  background: #8047f8;
 }
 
 .subtitle {

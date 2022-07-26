@@ -20,7 +20,10 @@
         <p>{{ quantity }}</p>
         <button v-on:click="increment" class="right">+</button>
       </div>
-      <button>comprar</button>
+
+      <button class="buy">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+      </button>
     </div>
   </div>
 </template>
@@ -48,6 +51,21 @@ export default {
 </script>
 
 <style scoped>
+.buy {
+  background: #4b2995;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  border-radius: 8px;
+}
+
+.buy:hover {
+  cursor: pointer;
+  background: #4b5999;
+}
+
 .container {
   position: relative;
   display: flex;
